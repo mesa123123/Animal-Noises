@@ -1,11 +1,12 @@
 import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import pig from "@/components/Pig.vue";
+import fox from "@/components/Fox.vue";
 
-describe("HelloWorld.vue", () => {
-  it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
+describe("Pig", () => {
+  it("Displays the Correct title", () => {
+    const msg = "What does the piggy say?";
+    const wrapper = shallowMount(pig, {
+      propsData: { pigTitle }
     });
     expect(wrapper.text()).toMatch(msg);
   });
