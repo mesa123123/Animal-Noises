@@ -1,20 +1,28 @@
 <template>
   <div id="app">
-    <v-app id="barnYard">
+    <v-app id="barnYard" class="transparent">
       <v-container>
         <!-- Card to store the animal noise -->
-          <v-flex offset-md4 offset-sm4 offset-xs4 offset-lg4 sm4 xs4 md4>
-            <h1  justify-center align-center text-md-center text-xs-center text-sm-center text-lg-center>{{ animalPhrase }}</h1>
-          </v-flex>
-        <v-flex justify-center align-center offset-md3 offset-sm3 offset-xs offset-lg3>
+        <v-flex offset-md1 offset-sm1 offset-xs1 offset-lg1>
+          <h1
+            id="animalTitle"
+            justify-center
+            align-center
+            text-md-center
+            text-xs-center
+            text-sm-center
+            text-lg-center
+          >{{ animalPhrase }}</h1>
+        </v-flex>
+        <v-flex justify-center align-center offset-md3 offset-sm3 offset-xs3 offset-lg3>
           <v-responsive id="animalPic">
-            <v-img :src= "centerPicture" v-on:click="centerPhrase" height= "40vw" width="48vw"/>
+            <v-img :src="centerPicture" v-on:click="centerPhrase" height="40vw" width="48vw"/>
           </v-responsive>
         </v-flex>
-      </v-container> 
-      <v-container app allow-overflow>
+      </v-container>
+      <v-container app>
         <!-- Button Menu in lower corner -->
-        <v-layout row id="buttonMenu" allow-overflow>
+        <v-layout row id="buttonMenu">
           <table id="animalsMenu">
             <td>
               <v-fab-transition>
@@ -39,8 +47,8 @@
             </td>
             <td>
               <v-btn color="red" fab @click.native="menuOpen()">
-                <v-icon>menu</v-icon>
-              </v-btn>  
+                <v-icon>add</v-icon>
+              </v-btn>
             </td>
           </table>
         </v-layout>
@@ -66,8 +74,8 @@ export default {
   data() {
     return {
       menuOut: false,
-      animal: "none",
-      animalPhrase: "Open the Menu",
+      firstSelection: false,
+      animalPhrase: "Open The Menu Below",
       centerPhrase: "none",
       centerPicture: "none",
       foxsSound: foxsSound,
@@ -77,8 +85,9 @@ export default {
   },
   methods: {
     menuOpen: function(event) {
-      if (this.animalPhrase === "Open the menu") {
+      if (!this.firstSelection) {
         this.animalPhrase = "Pick an Animal";
+        this.firstSelection = true;
       }
       this.menuOut = !this.menuOut;
     },
@@ -107,10 +116,9 @@ export default {
 };
 </script>
 
-
-<style scoped>
+<style>
 #animalTitle {
-  border-bottom: 5px solid rgba(125, 125, 125, 0.3);
+  font-size: 10vw;
 }
 #animalPic {
   padding-bottom: 5vh;
@@ -119,6 +127,9 @@ export default {
 #buttonMenu {
   position: absolute;
   bottom: 5%;
-  right: 10%;
+  right: 5%;
+}
+#animalsMenu {
+  width: 100%;
 }
 </style>
